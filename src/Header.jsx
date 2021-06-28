@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, Container, Segment, Grid, Image } from "semantic-ui-react";
-import ReactLogo from "./images/rlogo.png";
+import Logo from "./images/logo.png";
 
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
@@ -17,7 +17,7 @@ function Header() {
           <Grid.Row className="d-flex jusfify-content-between p-2 align-items-center">
             <Grid.Column width={3}>
               <Image
-                src={ReactLogo}
+                src={Logo}
                 alt=""
                 style={{ height: "80px", width: "80px" }}
                 fluid
