@@ -19,7 +19,7 @@ function Header() {
               <Image
                 src={Logo}
                 alt=""
-                style={{ height: "80px", width: "80px" }}
+                style={{ height: "100px", width: "160px" }}
                 fluid
               />
             </Grid.Column>
