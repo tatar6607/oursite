@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, Container, Segment, Grid, Image } from "semantic-ui-react";
-import Logo from "./images/logo.png";
+import Logo from "../images/logo.png";
 
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
