@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Card, Icon, Header, Image } from "semantic-ui-react";
+import { Container, Card, Header, Image } from "semantic-ui-react";
 import "./Body.css";
 import team from "../data/team_data ";
 const Team = () => {
