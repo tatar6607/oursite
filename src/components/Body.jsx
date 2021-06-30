@@ -4,8 +4,6 @@ import "./Body.css";
 import datas from '../data/body_cardata';
 
 const Body = () => {
-
-
   return (
     <div>
       <Container textAlign="center" className="body-card desc">
@@ -17,7 +15,7 @@ const Body = () => {
           {datas.map((info) => {
             const { header, description, icon, color } = info;
             return (
-              <Card color={color} href="/" raised={true}>
+              <Card color={color} href="/">
                 <Card.Content>
                   <Card.Header className="icon-padding">
                     <Icon name={icon} size="big" color={color} />
