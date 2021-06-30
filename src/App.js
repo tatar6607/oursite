@@ -1,7 +1,12 @@
 import React from "react";
-import Body from "./components/Body";
-import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import Login from "./pages/Login";
+import Team from "./pages/Team";
+import Contact from "./pages/Contact";
+
 
 function App() {
   return (
@@ -9,10 +14,16 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Body />
+          <Home />
         </Route>
         <Route exact path="/login">
-          <Body />
+          <Login />
+        </Route>
+        <Route exact path="/team">
+          <Team />
+        </Route>
+        <Route exact path="/contact">
+          <Contact />
         </Route>
       </Switch>
     </Router>

@@ -1,12 +1,23 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Menu, Container, Segment, Grid, Image } from "semantic-ui-react";
 import Logo from "../images/logo.png";
 
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
+  const history = useHistory();
 
-  const handleItemClick = (e, { name }) =>
+  const handleItemClick = (e, { name }) =>{
     setActiveButton({ activeItem: name });
+
+    if(name === "home"){
+      history.push(`/`);
+    }else{
+      history.push(`/${name}`);
+    }
+    
+  }
+    
 
   const { activeItem } = activeButton;
 
@@ -31,13 +42,18 @@ function Header() {
                   onClick={handleItemClick}
                 />
                 <Menu.Item
-                  name="messages"
-                  active={activeItem === "messages"}
+                  name="services"
+                  active={activeItem === "services"}
                   onClick={handleItemClick}
                 />
                 <Menu.Item
-                  name="friends"
-                  active={activeItem === "friends"}
+                  name="team"
+                  active={activeItem === "team"}
+                  onClick={handleItemClick}
+                />
+                <Menu.Item
+                  name="contact"
+                  active={activeItem === "contact"}
                   onClick={handleItemClick}
                 />
                 <Menu.Menu position="right">
