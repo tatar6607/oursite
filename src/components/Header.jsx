@@ -42,13 +42,13 @@ function Header() {
                   onClick={handleItemClick}
                 />
                 <Menu.Item
-                  name="messages"
-                  active={activeItem === "messages"}
+                  name="services"
+                  active={activeItem === "services"}
                   onClick={handleItemClick}
                 />
                 <Menu.Item
-                  name="friends"
-                  active={activeItem === "friends"}
+                  name="team"
+                  active={activeItem === "team"}
                   onClick={handleItemClick}
                 />
                 <Menu.Menu position="right">
