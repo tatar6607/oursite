@@ -24,7 +24,7 @@ function Header() {
               />
             </Grid.Column>
             <Grid.Column width={13}>
-              <Menu inverted pointing secondary size="huge" stackable>
+              <Menu inverted pointing secondary size="huge">
                 <Menu.Item
                   name="home"
                   active={activeItem === "home"}
