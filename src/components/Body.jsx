@@ -17,7 +17,7 @@ const Body = () => {
           {datas.map((info) => {
             const { header, description, icon, color } = info;
             return (
-              <Card color={color} href="/">
+              <Card color={color} href="/" raised={true}>
                 <Card.Content>
                   <Card.Header className="icon-padding">
                     <Icon name={icon} size="big" color={color} />
