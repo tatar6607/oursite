@@ -1,35 +1,25 @@
 import React from "react";
-import { Container, Card, Header, Image } from "semantic-ui-react";
-import "./Body.css";
-import team from "../data/team_data ";
-const Team = () => {
+import { Container, Card, Icon, Header } from "semantic-ui-react";
+import "./Home.css";
+import datas from "../data/body_card_data";
+const Work = () => {
   
   return (
-    <div>
       <Container textAlign="center" className="body-card desc">
         <Header as="h1" style={{ padding: "15px" }}>
-          Our Team
+          What DO We DO?
         </Header>
+        {/* <Card.Group centered items={datas} /> */}
         <Card.Group centered>
-          {team.map((info) => {
-            const { header, description, image, color, title } = info;
+          {datas.map((info) => {
+            const { header, description, icon, color } = info;
             return (
               <Card color={color} href="/" raised={true}>
                 <Card.Content>
                   <Card.Header className="icon-padding">
-                  <Image
-                    src={image}
-                    alt=""
-                    size='small'
-                     circular
-                 />
+                    <Icon name={icon} size="big" color={color} />
                   </Card.Header>
                   <Card.Header content={header} />
-                  <Card.Meta>
-                      <span>
-                        {title}
-                      </span>
-                  </Card.Meta>
                 </Card.Content>
                 <Card.Content description={description} />
               </Card>
@@ -37,8 +27,7 @@ const Team = () => {
           })}
         </Card.Group>
       </Container>
-    </div>
   );
 };
 
-export default Team;
+export default Work;

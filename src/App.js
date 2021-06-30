@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Body from "./components/Body";
+import Home from "./pages/Home";
 import Header from "./components/Header";
-import Login from "./components/Login";
-import Team from "./components/Team";
+import Login from "./pages/Login";
+import Team from "./pages/Team";
+import Contact from "./pages/Contact";
 
 
 function App() {
@@ -13,13 +14,16 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Body />
+          <Home />
         </Route>
         <Route exact path="/login">
           <Login />
         </Route>
         <Route exact path="/team">
           <Team />
+        </Route>
+        <Route exact path="/contact">
+          <Contact />
         </Route>
       </Switch>
     </Router>
