@@ -24,7 +24,7 @@ function Header() {
               />
             </Grid.Column>
             <Grid.Column width={13}>
-              <Menu inverted pointing secondary size="huge" stackable>
+              <Menu inverted pointing secondary size="huge">
                 <Menu.Item
                   name="home"
                   active={activeItem === "home"}
@@ -56,35 +56,6 @@ function Header() {
         </Grid>
       </Container>
     </Segment>
-
-    // <React.Fragment>
-    //   <Menu pointing inverted attached="bottom" size="huge">
-    //     <Container>
-    //       <Menu.Item
-    //         name="home"
-    //         active={activeItem === "home"}
-    //         onClick={handleItemClick}
-    //       />
-    //       <Menu.Item
-    //         name="messages"
-    //         active={activeItem === "messages"}
-    //         onClick={handleItemClick}
-    //       />
-    //       <Menu.Item
-    //         name="friends"
-    //         active={activeItem === "friends"}
-    //         onClick={handleItemClick}
-    //       />
-    //       <Menu.Menu position="right">
-    //         <Menu.Item
-    //           name="logout"
-    //           active={activeItem === "logout"}
-    //           onClick={handleItemClick}
-    //         />
-    //       </Menu.Menu>
-    //     </Container>
-    //   </Menu>
-    // </React.Fragment>
   );
 }
 
