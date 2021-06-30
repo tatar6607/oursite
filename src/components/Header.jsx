@@ -51,6 +51,11 @@ function Header() {
                   active={activeItem === "team"}
                   onClick={handleItemClick}
                 />
+                <Menu.Item
+                  name="contact"
+                  active={activeItem === "contact"}
+                  onClick={handleItemClick}
+                />
                 <Menu.Menu position="right">
                   <Menu.Item
                     name="login"
