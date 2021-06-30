@@ -1,7 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Body from "./components/Body";
 import Header from "./components/Header";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./components/Login";
+
 
 function App() {
   return (
@@ -12,7 +15,7 @@ function App() {
           <Body />
         </Route>
         <Route exact path="/login">
-          <Body />
+          <Login />
         </Route>
       </Switch>
     </Router>
