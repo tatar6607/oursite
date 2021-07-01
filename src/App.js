@@ -6,12 +6,13 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
-
+import FooterMenu from "./components/Footer";
 
 function App() {
   return (
     <Router>
       <Header />
+
       <Switch>
         <Route exact path="/">
           <Home />
@@ -26,6 +27,7 @@ function App() {
           <Contact />
         </Route>
       </Switch>
+      <FooterMenu />
     </Router>
   );
 }
