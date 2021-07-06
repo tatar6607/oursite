@@ -7,17 +7,15 @@ function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
   const history = useHistory();
 
-  const handleItemClick = (e, { name }) =>{
+  const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
 
-    if(name === "home"){
+    if (name === "home") {
       history.push(`/`);
-    }else{
+    } else {
       history.push(`/${name}`);
     }
-    
-  }
-    
+  };
 
   const { activeItem } = activeButton;
 
