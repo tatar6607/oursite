@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessagesProvider } from "./contexts/MessagesContext";
 import { TeamProvider } from "./contexts/TeamContext";
+import { BodyCardDataProvider } from "./contexts/BodyCardData";
 
 import Home from "./pages/Home";
 import Header from "./components/Header";
@@ -18,6 +19,7 @@ function App() {
     <AuthProvider>
       <MessagesProvider>
         <TeamProvider>
+          <BodyCardDataProvider>
         <Router>
           <Header />
           <Switch>
@@ -39,6 +41,7 @@ function App() {
           </Switch>
           <FooterMenu />
         </Router>
+        </BodyCardDataProvider>
         </TeamProvider>
       </MessagesProvider>
     </AuthProvider>
