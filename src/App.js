@@ -5,6 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { MessagesProvider } from "./contexts/MessagesContext";
 import { TeamProvider } from "./contexts/TeamContext";
 import { BodyCardDataProvider } from "./contexts/BodyCardData";
+import { ClientsProvider } from "./contexts/ClientsContext";
 
 import Home from "./pages/Home";
 import Header from "./components/Header";
@@ -20,6 +21,7 @@ function App() {
       <MessagesProvider>
         <TeamProvider>
           <BodyCardDataProvider>
+            <ClientsProvider>
         <Router>
           <Header />
           <Switch>
@@ -41,6 +43,7 @@ function App() {
           </Switch>
           <FooterMenu />
         </Router>
+        </ClientsProvider>
         </BodyCardDataProvider>
         </TeamProvider>
       </MessagesProvider>

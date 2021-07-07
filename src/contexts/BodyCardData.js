@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {store} from '../firebase';
 
-import { useAuth } from './AuthContext';
+// import { useAuth } from './AuthContext';
 
 const BodyCardDataContext = React.createContext();
 
@@ -12,7 +12,7 @@ export function useBodyCardData() {
 
 export function BodyCardDataProvider({ children }) {
   const [bodyCardData, setBodyCardData] = useState([]);
-  const {currentUser} = useAuth();
+  // const {currentUser} = useAuth();
 
   const ref = store.collection('body_card_data');
 

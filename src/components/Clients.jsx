@@ -1,8 +1,14 @@
 import React from "react";
 import { Container, Grid, Header, Image } from "semantic-ui-react";
 import "./Home.css";
-import clients from "../data/clients_data";
+// import clients from "../data/clients_data";
+
+import { useClients } from "../contexts/ClientsContext";
+
 const Clients = () => {
+
+  const {clients} = useClients();
+
   return (
     <Container textAlign="center" className="body-card desc">
       <Header as="h1" style={{ padding: "20px" }}>
