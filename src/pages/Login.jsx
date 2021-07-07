@@ -1,46 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import {
   Button,
   Form,
   Grid,
   Header,
-  Message,
+  // Message,
   Segment,
 } from "semantic-ui-react";
-import firebase from "../firebase";
+import {useHistory} from 'react-router-dom';
+
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
-  const [users, setUsers] = useState([]);
 
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-  const getUsers = () => {
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setUsers(items)
-    });
+  const {login} = useAuth();
+  const history = useHistory();
+
+  function handleEmailChange(target) {
+    setEmail(target.value);
   }
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  function handlePasswordChange(target) {
+    setPassword(target.value);
+  }
+  async function handleSubmit(e){
+    e.preventDefault();
 
-  console.log(users);
+    try {
+      await login(email, password);
+      history.push('/messages');
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Grid textAlign="center" verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450, marginTop: "4rem" }}>
         <Header as="h2" color="black" textAlign="center">
           Log-in to your account
         </Header>
-        <Form size="large">
+        <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
+    
             <Form.Input
               fluid
               icon="user"
               iconPosition="left"
               placeholder="E-mail address"
+              onChange={(e) => handleEmailChange(e.target)}
             />
             <Form.Input
               fluid
@@ -48,16 +59,16 @@ const Login = () => {
               iconPosition="left"
               placeholder="Password"
               type="password"
+              onChange={(e) => handlePasswordChange(e.target)}
             />
-
             <Button color="black" fluid size="large">
               Login
             </Button>
           </Segment>
         </Form>
-        <Message>
+        {/* <Message>
           New to us? <a href="/">Sign Up</a>
-        </Message>
+        </Message> */}
       </Grid.Column>
     </Grid>
   );
