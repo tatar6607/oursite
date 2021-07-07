@@ -1,8 +1,13 @@
 import React from "react";
 import { Container, Card, Header, Image } from "semantic-ui-react";
 import "./Home.css";
-import team from "../data/team_data ";
+// import team from "../data/team_data ";
+import { useTeam } from "../contexts/TeamContext";
+
 const Team = () => {
+  
+  const {teamMembers} = useTeam();
+
   
   return (
     <div>
@@ -11,17 +16,17 @@ const Team = () => {
           Our Team
         </Header>
         <Card.Group centered>
-          {team.map((info) => {
-            const { header, description, image, color, title } = info;
+          {teamMembers.map((info) => {
+            const { header, description, image, title } = info;
             return (
-              <Card color={color} href="/" raised={true}>
+              <Card  href="/" raised={true}>
                 <Card.Content>
                   <Card.Header className="icon-padding">
                   <Image
                     src={image}
                     alt=""
                     size='small'
-                     circular
+                    circular
                  />
                   </Card.Header>
                   <Card.Header content={header} />
