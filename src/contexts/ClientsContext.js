@@ -30,7 +30,7 @@ export function ClientsProvider({ children }) {
                 var gsReference = storage.ref(`clients_images/${data.image}`);
                 gsReference.getDownloadURL()
                   .then((url)=>{
-                      console.log(url);
+                      // console.log(url);
                     data.image = url
                   })
                   .catch((error)=>{
@@ -40,7 +40,7 @@ export function ClientsProvider({ children }) {
             });
 
             while(items.length) newItems.push(items.splice(0,4))
-            console.log(newItems)
+            // console.log(newItems)
             setClients(newItems);
         }); 
   }, [])
