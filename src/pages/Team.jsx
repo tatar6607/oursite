@@ -11,6 +11,9 @@ const Team = () => {
   const [cartDocId, setCartDocId] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [imagePath, setImagePath] = useState('');
+  const [header, setHeader] = useState("");
+  const [title, setTitle] = useState("");
+  const [descripton, setDescripton] = useState("");
   const { currentUser } = useAuth();
   const fileInputRef = createRef();
 
@@ -31,6 +34,19 @@ const Team = () => {
     // setImagePath(e.target.files[0].name);
     // console.log(imagePath);
   };
+
+  const handleHeaderChange = (e) =>{
+    setHeader(e.target.value);
+  }
+
+  const handleTitleChange = (e) =>{
+    setTitle(e.target.value);
+  }
+
+  const handleDescriptionChange = (e) =>{
+    setDescripton(e.target.value);
+  }
+
 
   return (
     <div>
@@ -74,7 +90,7 @@ const Team = () => {
                       fluid
                       placeholder={header}
                       required
-                    // onChange={handleFirstNameChange}
+                    onChange={handleHeaderChange}
                     />
                     :
                     <Card.Header content={header} />
@@ -84,7 +100,7 @@ const Team = () => {
                       fluid
                       placeholder={title}
                       required
-                    // onChange={handleFirstNameChange}
+                    onChange={handleTitleChange}
                     />
                     :
                     <Card.Meta>
@@ -101,7 +117,7 @@ const Team = () => {
                     required
                     placeholder={description}
                     style={{ minHeight: "200px" }}
-                  // onChange={handleMessageChange}
+                  onChange={handleDescriptionChange}
 
                   />
                   :
