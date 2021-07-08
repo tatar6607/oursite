@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Menu, Container, Segment, Grid, Image } from "semantic-ui-react";
+import { useAuth } from "../contexts/AuthContext";
 import Logo from "../images/logo.png";
 
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
   const history = useHistory();
+  const {currentUser, logout} = useAuth();
 
   const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
-
-    if (name === "home") {
+    console.log(currentUser)
+    if(name === 'login' && currentUser){
+      logout()
+      history.push(`/`);
+    }else if (name === "home") {
       history.push(`/`);
     } else {
       history.push(`/${name}`);
@@ -54,14 +59,29 @@ function Header() {
                   active={activeItem === "contact"}
                   onClick={handleItemClick}
                 />
+                {
+                  currentUser && (
+                    <Menu.Item
+                  name="messages"
+                  active={activeItem === "messages"}
+                  onClick={handleItemClick}
+                />
+                  )
+                }
                 <Menu.Menu position="right">
                   <Menu.Item
                     name="login"
                     active={activeItem === "login"}
                     onClick={handleItemClick}
                   >
-                    Login
+                    {currentUser? "Logout" : "Login"}
                   </Menu.Item>
+                  {currentUser? (
+                    <Menu.Item
+                    name={`${currentUser.email}`}
+                    active={activeItem === currentUser.email}
+                  ></Menu.Item>
+                  ): null}
                 </Menu.Menu>
               </Menu>
             </Grid.Column>

@@ -1,8 +1,27 @@
-import React from "react";
-import { Container, Card, Header, Image } from "semantic-ui-react";
+import React, {useState} from "react";
+import { Container, Card, Header, Image, Button, Form, TextArea } from "semantic-ui-react";
 import "./Home.css";
-import team from "../data/team_data ";
+// import team from "../data/team_data ";
+import { useTeam } from "../contexts/TeamContext";
+import { useAuth } from "../contexts/AuthContext";
+
 const Team = () => {
+  
+  const {teamMembers, updateTeamMember} = useTeam();
+
+  const [editMode, setEditMode] = useState(false);
+  const {currentUser} = useAuth();
+
+  const handleButtonClick = (b)=>{
+    if(b.target.innerText === 'Edit'){
+      setEditMode(true);
+      b.target.innerText = 'Save'
+    }else{
+      setEditMode(false);
+      b.target.innerText = 'Edit'
+    }
+    
+  }
   
   return (
     <div>
@@ -11,27 +30,71 @@ const Team = () => {
           Our Team
         </Header>
         <Card.Group centered>
-          {team.map((info) => {
-            const { header, description, image, color, title } = info;
+          {teamMembers.map((info) => {
+            const { header, description, image, title, docId } = info;
             return (
-              <Card color={color} href="/" raised={true}>
+              <Card  raised={true} key={docId}>
                 <Card.Content>
                   <Card.Header className="icon-padding">
                   <Image
                     src={image}
                     alt=""
                     size='small'
-                     circular
+                    circular
                  />
                   </Card.Header>
+                  {editMode?
+                  <Form.Input
+                  fluid
+                  placeholder={header}
+                  required
+                  // onChange={handleFirstNameChange}
+                  />
+                  :
                   <Card.Header content={header} />
+                  }
+                  {editMode?
+                  <Form.Input
+                  fluid
+                  placeholder={title}
+                  required
+                  // onChange={handleFirstNameChange}
+                  />
+                  :
                   <Card.Meta>
                       <span>
                         {title}
                       </span>
                   </Card.Meta>
+                  }
                 </Card.Content>
+                {editMode?
+                <Form.Field
+                    id="form-textarea-control-opinion"
+                    control={TextArea}
+                    required
+                    placeholder={description}
+                    style={{ minHeight: "200px" }}
+                    // onChange={handleMessageChange}
+
+                />
+                :
                 <Card.Content description={description} />
+                }
+                {
+                  currentUser?
+                  (
+                    <Card.Content extra>
+                    <div className='ui two buttons'>
+                    <Button basic color='green' onClick={handleButtonClick}>
+                        Edit
+                    </Button>
+                    </div>
+                </Card.Content>
+                  )
+                  :
+                  null
+                }
               </Card>
             );
           })}
