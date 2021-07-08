@@ -11,7 +11,7 @@ function Header() {
 
   const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
-
+    console.log(currentUser)
     if(name === 'login' && currentUser){
       logout()
       history.push(`/`);
@@ -76,6 +76,12 @@ function Header() {
                   >
                     {currentUser? "Logout" : "Login"}
                   </Menu.Item>
+                  {currentUser? (
+                    <Menu.Item
+                    name={`${currentUser.email}`}
+                    active={activeItem === currentUser.email}
+                  ></Menu.Item>
+                  ): null}
                 </Menu.Menu>
               </Menu>
             </Grid.Column>
