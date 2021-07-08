@@ -7,15 +7,15 @@ import Logo from "../images/logo.png";
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
   const history = useHistory();
-  const {currentUser, logout} = useAuth();
+  const { currentUser, logout } = useAuth();
 
   const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
-    console.log(currentUser)
-    if(name === 'login' && currentUser){
+    // console.log(currentUser)
+    if (name === 'login' && currentUser) {
       logout()
       history.push(`/`);
-    }else if (name === "home") {
+    } else if (name === "home") {
       history.push(`/`);
     } else {
       history.push(`/${name}`);
@@ -62,10 +62,10 @@ function Header() {
                 {
                   currentUser && (
                     <Menu.Item
-                  name="messages"
-                  active={activeItem === "messages"}
-                  onClick={handleItemClick}
-                />
+                      name="messages"
+                      active={activeItem === "messages"}
+                      onClick={handleItemClick}
+                    />
                   )
                 }
                 <Menu.Menu position="right">
@@ -74,14 +74,14 @@ function Header() {
                     active={activeItem === "login"}
                     onClick={handleItemClick}
                   >
-                    {currentUser? "Logout" : "Login"}
+                    {currentUser ? "Logout" : "Login"}
                   </Menu.Item>
-                  {currentUser? (
+                  {currentUser ? (
                     <Menu.Item
-                    name={`${currentUser.email}`}
-                    active={activeItem === currentUser.email}
-                  ></Menu.Item>
-                  ): null}
+                      name={`${currentUser.email}`}
+                      active={activeItem === currentUser.email}
+                    ></Menu.Item>
+                  ) : null}
                 </Menu.Menu>
               </Menu>
             </Grid.Column>
