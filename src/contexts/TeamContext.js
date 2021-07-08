@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import {store} from '../firebase';
 import { storage } from "../firebase"
 
-// import { useAuth } from './AuthContext';
+
 
 const TeamContext = React.createContext();
 
@@ -13,7 +13,7 @@ export function useTeam() {
 
 export function TeamProvider({ children }) {
   const [teamMembers, setTeamMembers] = useState([]);
-  // const {currentUser} = useAuth();
+
 
   const ref = store.collection('team');
 
@@ -21,11 +21,16 @@ export function TeamProvider({ children }) {
       ref.add(member);
   }
 
+  function updateTeamMember(updateObject, docId){
+    ref.doc(docId).update(updateObject);
+  }
+
   useEffect(()=>{
         ref.onSnapshot((querySnapshot)=>{
             const items =[];
             querySnapshot.forEach((doc)=>{
                 const data = doc.data();
+                data.docId = doc.id;
                 var gsReference = storage.ref(`team_member_images/${data.image}`);
                 gsReference.getDownloadURL()
                   .then((url)=>{
@@ -43,7 +48,8 @@ export function TeamProvider({ children }) {
   
   const value = {
     teamMembers,
-    addTeamMember
+    addTeamMember,
+    updateTeamMember
   }
 
 
