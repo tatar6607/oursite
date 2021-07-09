@@ -21,9 +21,28 @@ export function TeamProvider({ children }) {
     ref.add(member);
   }
 
-  function updateTeamMember(updateObject, docId) {
+  function updateTeamMember(docId, updateObject) {
 
     ref.doc(docId).update(updateObject);
+  }
+
+  function uploadImage(docId, image, profil){
+    console.log(docId)
+    console.log(image)
+    console.log(profil)
+    if(image){
+      console.log(image.name);
+      const storageRef = storage.ref(`team_member_images`);
+      const imageRef = storageRef.child(image.name);
+      imageRef.put(image)
+     //5.
+     .then(() => {
+        updateTeamMember(docId, {...profil, image: image.name})
+        alert("Image uploaded successfully to Firebase.");
+    });
+    }else{
+      alert("Please upload an image first.");
+    }
   }
 
   useEffect(() => {
@@ -50,7 +69,8 @@ export function TeamProvider({ children }) {
   const value = {
     teamMembers,
     addTeamMember,
-    updateTeamMember
+    updateTeamMember,
+    uploadImage
   }
 
 
