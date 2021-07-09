@@ -1,9 +1,10 @@
 import React, { useState, createRef } from "react";
-import { Container, Card, Header, Image, Button, Form, TextArea } from "semantic-ui-react";
+import { Container, Card, Header, Image, Button, Form, TextArea, Segment } from "semantic-ui-react";
 import "./Home.css";
 // import team from "../data/team_data ";
 import { useTeam } from "../contexts/TeamContext";
 import { useAuth } from "../contexts/AuthContext";
+// import TeamImage from '../images/team_4.jpeg'
 
 const Team = () => {
 
@@ -55,6 +56,9 @@ const Team = () => {
 
   return (
     <div>
+      {/* <Segment style={{padding:0}}>
+        <Image src={TeamImage} style={{height: '300px'}} fluid></Image>
+      </Segment> */}
       <Container textAlign="center" className="body-card desc">
         <Header as="h1" style={{ padding: "15px" }}>
           Our Team
