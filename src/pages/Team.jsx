@@ -11,18 +11,27 @@ const Team = () => {
   const [cartDocId, setCartDocId] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [imagePath, setImagePath] = useState('');
+  // const [header, setHeader] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [descripton, setDescripton] = useState("");
+  const [profil, setProfil] = useState({
+    header: '', title: '', description: ''
+  });
   const { currentUser } = useAuth();
   const fileInputRef = createRef();
 
-  const handleButtonClick = (e, docId) => {
+  const handleButtonClick = (e, member) => {
+    const { docId, header, title, description } = member;
+    setProfil({ header, title, description });
     if (e.target.innerText === 'Edit') {
       setEditMode(true);
       setCartDocId(docId);
       e.target.innerText = 'Save'
 
-    } else {
+    } else if (e.target.innerText === 'Save') {
       setEditMode(false);
       e.target.innerText = 'Edit'
+      updateTeamMember(profil, docId);
     }
   }
 
@@ -32,6 +41,10 @@ const Team = () => {
     // console.log(imagePath);
   };
 
+  const handleProfilChange = (e, name) => {
+    setProfil({ ...profil, [name]: e.target.value });
+  }
+
   return (
     <div>
       <Container textAlign="center" className="body-card desc">
@@ -39,8 +52,8 @@ const Team = () => {
           Our Team
         </Header>
         <Card.Group centered>
-          {teamMembers.map((info, i, arr) => {
-            const { header, description, image, title, docId } = info;
+          {teamMembers.map((member, i, arr) => {
+            const { header, description, image, title, docId } = member;
             return (
               <Card raised={true} key={docId}>
                 <Card.Content>
@@ -72,9 +85,9 @@ const Team = () => {
                   {editMode && docId === cartDocId ?
                     <Form.Input
                       fluid
-                      placeholder={header}
                       required
-                    // onChange={handleFirstNameChange}
+                      onChange={(e) => handleProfilChange(e, 'header')}
+                      value={profil.header}
                     />
                     :
                     <Card.Header content={header} />
@@ -82,9 +95,9 @@ const Team = () => {
                   {editMode && docId === cartDocId ?
                     <Form.Input
                       fluid
-                      placeholder={title}
                       required
-                    // onChange={handleFirstNameChange}
+                      onChange={(e) => handleProfilChange(e, 'title')}
+                      value={profil.title}
                     />
                     :
                     <Card.Meta>
@@ -99,10 +112,9 @@ const Team = () => {
                     id="form-textarea-control-opinion"
                     control={TextArea}
                     required
-                    placeholder={description}
                     style={{ minHeight: "200px" }}
-                  // onChange={handleMessageChange}
-
+                    onChange={(e) => handleProfilChange(e, 'description')}
+                    value={profil.description}
                   />
                   :
                   <Card.Content description={description} />
@@ -112,7 +124,7 @@ const Team = () => {
                     (
                       <Card.Content extra>
                         <div className='ui two buttons'>
-                          <Button basic color='green' onClick={(e) => handleButtonClick(e, docId)}>
+                          <Button basic color='green' onClick={(e) => handleButtonClick(e, member)}>
                             Edit
                           </Button>
                         </div>
