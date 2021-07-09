@@ -7,13 +7,10 @@ import { useAuth } from "../contexts/AuthContext";
 
 const Team = () => {
 
-  const { teamMembers, updateTeamMember } = useTeam();
+  const { teamMembers, updateTeamMember, uploadImage } = useTeam();
   const [cartDocId, setCartDocId] = useState('');
   const [editMode, setEditMode] = useState(false);
-  const [imagePath, setImagePath] = useState('');
-  // const [header, setHeader] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [descripton, setDescripton] = useState("");
+  const [memberImage, setMemberImage] = useState(null);
   const [profil, setProfil] = useState({
     header: '', title: '', description: ''
   });
@@ -31,14 +28,25 @@ const Team = () => {
     } else if (e.target.innerText === 'Save') {
       setEditMode(false);
       e.target.innerText = 'Edit'
-      updateTeamMember(profil, docId);
+      updateTeamMember(docId, profil);
     }
   }
 
-  const fileChange = (e) => {
-    console.log(e.target.files[0]);
-    // setImagePath(e.target.files[0].name);
-    // console.log(imagePath);
+  const onImageChange = (e, docId) => {
+    const reader = new FileReader();
+    let file = e.target.files[0];
+    console.log(file);
+    if(file){
+      reader.onload = ()=>{
+        if(reader.readyState === 2){
+          setMemberImage(file);
+          uploadImage(docId, memberImage, profil);
+        }
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }else{
+      setMemberImage(null);
+    }
   };
 
   const handleProfilChange = (e, name) => {
@@ -75,7 +83,7 @@ const Team = () => {
                           ref={fileInputRef}
                           type="file"
                           hidden
-                          onChange={fileChange}
+                          onChange={(e)=>onImageChange(e, docId)}
                         />
                       </>
                       :
