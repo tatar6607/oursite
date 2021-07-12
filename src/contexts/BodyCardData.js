@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import {store} from '../firebase';
+import React, { useContext, useState, useEffect } from "react";
+import { store } from "../firebase";
 
 // import { useAuth } from './AuthContext';
 
@@ -9,36 +9,35 @@ export function useBodyCardData() {
   return useContext(BodyCardDataContext);
 }
 
-
 export function BodyCardDataProvider({ children }) {
   const [bodyCardData, setBodyCardData] = useState([]);
   // const {currentUser} = useAuth();
 
-  const ref = store.collection('body_card_data');
+  const ref = store.collection("body_card_data");
 
-  function addBodyCardData(cardData){
-      ref.add(cardData);
+  function addBodyCardData(cardData) {
+    ref.add(cardData);
   }
 
-  useEffect(()=>{
-        ref.onSnapshot((querySnapshot)=>{
-            const items =[];
-            querySnapshot.forEach((doc)=>{
-                items.push(doc.data());
-            });
-            setBodyCardData(items);
-        });  
-  }, [])
-  
+  useEffect(() => {
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setBodyCardData(items);
+      console.log("body card");
+    });
+  }, []);
+
   const value = {
     bodyCardData,
-    addBodyCardData
-  }
-
+    addBodyCardData,
+  };
 
   return (
     <BodyCardDataContext.Provider value={value}>
       {children}
     </BodyCardDataContext.Provider>
-  )
+  );
 }
