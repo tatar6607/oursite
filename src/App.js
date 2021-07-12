@@ -14,6 +14,7 @@ import Team from "./pages/Team";
 import Contact from "./pages/Contact";
 import FooterMenu from "./components/Footer";
 import Messages from "./pages/Messages";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -22,29 +23,32 @@ function App() {
         <TeamProvider>
           <BodyCardDataProvider>
             <ClientsProvider>
-        <Router>
-          <Header />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/team">
-              <Team />
-            </Route>
-            <Route exact path="/contact">
-              <Contact />
-            </Route>
-            <Route exact path="/messages">
-              <Messages />
-            </Route>
-          </Switch>
-          <FooterMenu />
-        </Router>
-        </ClientsProvider>
-        </BodyCardDataProvider>
+              <Router>
+                <Header />
+                <Switch>
+                  <Route exact path="/">
+                    <Home />
+                  </Route>
+                  <Route exact path="/login">
+                    <Login />
+                  </Route>
+                  <Route exact path="/team">
+                    <Team />
+                  </Route>
+                  <Route exact path="/contact">
+                    <Contact />
+                  </Route>
+                  <Route exact path="/messages">
+                    <Messages />
+                  </Route>
+                  <Route exact path="/profile">
+                    <Profile />
+                  </Route>
+                </Switch>
+                <FooterMenu />
+              </Router>
+            </ClientsProvider>
+          </BodyCardDataProvider>
         </TeamProvider>
       </MessagesProvider>
     </AuthProvider>
