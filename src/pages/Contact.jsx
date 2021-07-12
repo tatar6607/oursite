@@ -15,10 +15,18 @@ const Contact = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [person, setPerson] = useState("");
   const [message, setMessage] = useState("");
   const {addMessage} = useMessages();
   const [sent, setSent] = useState(false);
 
+  const persons = [
+  { key: '1', text: 'Oguz Akkas', value: 'oguz' },
+  { key: '2', text: 'Ozkan Cankaya', value: 'ozkan' },
+  { key: '3', text: 'Abdullah Kizil', value: 'abdullah' },
+  { key: '4', text: 'Hakki Sekerci', value: 'hakki' },
+  { key: '5', text: 'Erkan Hoca', value: 'erkan' },
+]
 
 
   const handleFirstNameChange = (e) =>{
@@ -32,6 +40,10 @@ const Contact = () => {
   const handleMessageChange = (e) =>{
     setMessage(e.target.value);
   }
+  
+  const handleContactWith = (e) =>{
+    setPerson(e.target.outerText);
+  }
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -44,6 +56,7 @@ const Contact = () => {
             firstName,
             lastName,
             email,
+            person,
             message
         }
         try {
@@ -106,6 +119,13 @@ const Contact = () => {
                     }
                     onChange={handleEmailChange}
                 />
+                  <Form.Select
+                    fluid
+                    label='Contact with'
+                    options={persons}
+                    placeholder='Contact with...'
+                    onChange = {handleContactWith}
+                  />
                 <Form.Field
                     id="form-textarea-control-opinion"
                     control={TextArea}
@@ -113,7 +133,7 @@ const Contact = () => {
                     required
                     placeholder="Message"
                     style={{ minHeight: "200px" }}
-                    onChange={handleMessageChange}
+                    onSubmit={handleMessageChange}
 
                 />
                 <Form.Field
