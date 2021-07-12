@@ -1,16 +1,25 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button, Card } from 'semantic-ui-react'
 
 import {useMessages} from '../contexts/MessagesContext';
+import { useAuth } from "../contexts/AuthContext";
 
 const Messages = () => {
 
     const {messages} = useMessages();
+    const { currentUser } = useAuth();
+    const [filteredData, setFilteredData] = useState(messages);
+
+      useEffect(() => {
+        setFilteredData(messages.filter((message) => message.email === currentUser.email ))
+        console.log(filteredData);
+      }, [])
 
     function displayMessages(){
-        return messages.map((message)=>{
+         
+        return filteredData.map((message, index)=>{
             return(
-                <Card>
+                <Card key={index}>
                 <Card.Content>
                     <Card.Header>{message.firstName} {message.lastName}</Card.Header>
                     <Card.Meta>
