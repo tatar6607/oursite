@@ -12,8 +12,8 @@ function Header() {
   const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
     // console.log(currentUser)
-    if (name === 'login' && currentUser) {
-      logout()
+    if (name === "login" && currentUser) {
+      logout();
       history.push(`/`);
     } else if (name === "home") {
       history.push(`/`);
@@ -59,15 +59,13 @@ function Header() {
                   active={activeItem === "contact"}
                   onClick={handleItemClick}
                 />
-                {
-                  currentUser && (
-                    <Menu.Item
-                      name="messages"
-                      active={activeItem === "messages"}
-                      onClick={handleItemClick}
-                    />
-                  )
-                }
+                {currentUser && (
+                  <Menu.Item
+                    name="messages"
+                    active={activeItem === "messages"}
+                    onClick={handleItemClick}
+                  />
+                )}
                 <Menu.Menu position="right">
                   <Menu.Item
                     name="login"
@@ -78,9 +76,12 @@ function Header() {
                   </Menu.Item>
                   {currentUser ? (
                     <Menu.Item
-                      name={`${currentUser.email}`}
-                      active={activeItem === currentUser.email}
-                    ></Menu.Item>
+                      name="profile"
+                      active={activeItem === "profile"}
+                      onClick={handleItemClick}
+                    >
+                      <span>{currentUser.email}</span>
+                    </Menu.Item>
                   ) : null}
                 </Menu.Menu>
               </Menu>
