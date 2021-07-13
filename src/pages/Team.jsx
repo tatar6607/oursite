@@ -1,14 +1,5 @@
 import React, { useState, createRef } from "react";
 import { Container, Card, Header, Image, Button, Form, TextArea, Segment } from "semantic-ui-react";
-import {
-  Container,
-  Card,
-  Header,
-  Image,
-  Button,
-  Form,
-  TextArea,
-} from "semantic-ui-react";
 import "./Home.css";
 // import team from "../data/team_data ";
 import { useTeam } from "../contexts/TeamContext";
