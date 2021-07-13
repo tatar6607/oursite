@@ -25,7 +25,7 @@ const Contact = () => {
     { key: "2", text: "Ozkan Cankaya", value: "tatar66@gmail.com" },
     { key: "3", text: "Abdullah Kizil", value: "abdkzl.nw@gmail.com" },
     { key: "4", text: "Hakki Sekerci", value: "hakkisekerci@gamil.com" },
-    { key: "5", text: "Erkan Hoca", value: "sercan7090@gmail.com" },
+    { key: "5", text: "Erkan Sahin", value: "sercan7090@gmail.com" },
   ];
 
   const handleFirstNameChange = (e) => {
