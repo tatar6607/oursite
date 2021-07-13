@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Menu, Container, Segment, Grid, Image } from "semantic-ui-react";
 import { useAuth } from "../contexts/AuthContext";
-import Logo from "../images/logo.png";
+import Logo from "../images/logoson.png";
 
 function Header() {
   const [activeButton, setActiveButton] = useState({ activeItem: "home" });
@@ -12,8 +12,8 @@ function Header() {
   const handleItemClick = (e, { name }) => {
     setActiveButton({ activeItem: name });
     // console.log(currentUser)
-    if (name === 'login' && currentUser) {
-      logout()
+    if (name === "login" && currentUser) {
+      logout();
       history.push(`/`);
     } else if (name === "home") {
       history.push(`/`);
@@ -31,9 +31,10 @@ function Header() {
           <Grid.Row className="d-flex jusfify-content-between p-2 align-items-center">
             <Grid.Column width={3}>
               <Image
+                size="massive"
                 src={Logo}
                 alt=""
-                style={{ height: "100px", width: "160px" }}
+                // style={{ height: "100px", width: "120px" }}
                 fluid
               />
             </Grid.Column>
@@ -59,15 +60,13 @@ function Header() {
                   active={activeItem === "contact"}
                   onClick={handleItemClick}
                 />
-                {
-                  currentUser && (
-                    <Menu.Item
-                      name="messages"
-                      active={activeItem === "messages"}
-                      onClick={handleItemClick}
-                    />
-                  )
-                }
+                {currentUser && (
+                  <Menu.Item
+                    name="messages"
+                    active={activeItem === "messages"}
+                    onClick={handleItemClick}
+                  />
+                )}
                 <Menu.Menu position="right">
                   <Menu.Item
                     name="login"
@@ -78,9 +77,12 @@ function Header() {
                   </Menu.Item>
                   {currentUser ? (
                     <Menu.Item
-                      name={`${currentUser.email}`}
-                      active={activeItem === currentUser.email}
-                    ></Menu.Item>
+                      name="profile"
+                      active={activeItem === "profile"}
+                      onClick={handleItemClick}
+                    >
+                      <span>{currentUser.email}</span>
+                    </Menu.Item>
                   ) : null}
                 </Menu.Menu>
               </Menu>
