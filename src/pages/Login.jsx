@@ -31,7 +31,7 @@ const Login = () => {
 
     try {
       await login(email, password);
-      history.push('/messages');
+      history.push('/profile');
     } catch (error) {
       console.log(error)
     }
