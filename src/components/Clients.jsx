@@ -1,34 +1,36 @@
 import React from "react";
 import { Container, Grid, Header, Image } from "semantic-ui-react";
 import "./Home.css";
-import cleints from "../data/clients_data";
-const Clients = () => {
-  
-  return (
-      <Container textAlign="center" className="body-card desc clients">
-        <Header as="h1" style={{ padding: "15px" }}>
-          Our Clients
-        </Header>
-        {/* <Card.Group centered items={cleints} /> */}
-        <Grid>
-            {
-                cleints.map((row)=>{
-                    return(
-                        <Grid.Row columns={row.length}>
-                            {row.map((client)=>{
-                                return(
-                                    <Grid.Column>
-                                        <Image src={client.image} size="small"/>
-                                    </Grid.Column>
-                                )
-                            })}
+// import clients from "../data/clients_data";
 
-                        </Grid.Row>
-                    )
-                })
-            }
-        </Grid>
-      </Container>
+import { useClients } from "../contexts/ClientsContext";
+
+const Clients = () => {
+
+  const {clients} = useClients();
+
+  return (
+    <Container textAlign="center" className="body-card desc">
+      <Header as="h1" style={{ padding: "20px" }}>
+        Our Clients
+      </Header>
+      {/* <Card.Group centered items={clients} /> */}
+      <Grid container centered relaxed columns={6}>
+        {clients.map((row) => {
+          return (
+            <Grid.Row>
+              {row.map((client) => {
+                return (
+                  <Grid.Column>
+                    <Image src={client.image} size="large" />
+                  </Grid.Column>
+                );
+              })}
+            </Grid.Row>
+          );
+        })}
+      </Grid>
+    </Container>
   );
 };
 
