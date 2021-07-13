@@ -41,7 +41,6 @@ const Contact = () => {
   };
 
   const handleContactWith = (e, data) => {
-    console.log(data);
     setPersonEmail(data.value);
   };
 
