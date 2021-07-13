@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../images/logoson.png";
 import {
   Container,
   Divider,
@@ -92,7 +93,7 @@ function FooterMenu() {
             margin-right="auto"
             centered
             size="medium"
-            src="../images/logo.png"
+            src={logo}
           />
           <List horizontal inverted divided link size="small">
             <List.Item as="a" href="#">
