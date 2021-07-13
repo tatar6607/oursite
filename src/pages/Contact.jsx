@@ -24,7 +24,7 @@ const Contact = () => {
     { key: "1", text: "Oguz Akkas", value: "oakkas84@gmail.com" },
     { key: "2", text: "Ozkan Cankaya", value: "tatar66@gmail.com" },
     { key: "3", text: "Abdullah Kizil", value: "abdkzl.nw@gmail.com" },
-    { key: "4", text: "Hakki Sekerci", value: "hakkisekerci@gamil.com" },
+    { key: "4", text: "Hakki Sekerci", value: "hakkisekerci@gmail.com" },
     { key: "5", text: "Erkan Sahin", value: "sercan7090@gmail.com" },
   ];
 
@@ -41,6 +41,7 @@ const Contact = () => {
   };
 
   const handleContactWith = (e, data) => {
+    console.log(data);
     setPersonEmail(data.value);
   };
 
