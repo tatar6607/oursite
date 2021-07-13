@@ -25,7 +25,7 @@ const Contact = () => {
   { key: '2', text: 'Ozkan Cankaya', value: 'ozkan' },
   { key: '3', text: 'Abdullah Kizil', value: 'abdullah' },
   { key: '4', text: 'Hakki Sekerci', value: 'hakki' },
-  { key: '5', text: 'Erkan Hoca', value: 'erkan' },
+  { key: '5', text: 'Erkan Sahin', value: 'erkan' },
 ]
 
 
