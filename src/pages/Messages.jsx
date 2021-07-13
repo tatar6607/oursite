@@ -13,7 +13,7 @@ const Messages = () => {
     setFilteredData(
       messages.filter((message) => message.personEmail === currentUser.email)
     );
-    console.log(filteredData);
+    // console.log(filteredData);
   }, []);
 
   function displayMessages() {

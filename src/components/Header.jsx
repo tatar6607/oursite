@@ -60,13 +60,13 @@ function Header() {
                   active={activeItem === "contact"}
                   onClick={handleItemClick}
                 />
-                {currentUser && (
+                {/* {currentUser && (
                   <Menu.Item
                     name="messages"
                     active={activeItem === "messages"}
                     onClick={handleItemClick}
                   />
-                )}
+                )} */}
                 <Menu.Menu position="right">
                   <Menu.Item
                     name="login"
