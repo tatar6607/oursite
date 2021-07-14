@@ -1,5 +1,5 @@
 import React, { useState, createRef, useEffect } from "react";
-import { Container, Card, Header, Image, Button, Form, TextArea, Label } from "semantic-ui-react";
+import { Container, Card, Header, Image, Button, Form, TextArea, Label, Grid } from "semantic-ui-react";
 import {useHistory} from 'react-router-dom';
 
 import "./Home.css";
@@ -7,6 +7,7 @@ import "./Home.css";
 import { useTeam } from "../contexts/TeamContext";
 import { useAuth } from "../contexts/AuthContext";
 import { useMessages } from "../contexts/MessagesContext";
+import Messages from '../components/Messages';
 // import TeamImage from '../images/team_4.jpeg'
 
 const Profile = () => {
@@ -14,6 +15,7 @@ const Profile = () => {
   const [cartDocId, setCartDocId] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [memberImage, setMemberImage] = useState(null);
+  const [messageButtonText, setMessageButtonText] = useState('Show Messages');
   const [profil, setProfil] = useState({
     header: "",
     title: "",
@@ -21,6 +23,7 @@ const Profile = () => {
   });
   const [currentUserProfil, setCurrentUserProfil] = useState([]);
   const [currentUserMessages, setCurrentUserMessages] = useState([]);
+  const [showMessages, setShowMessages] = useState(false);
   const { currentUser } = useAuth();
   const { messages } = useMessages();
   const fileInputRef = createRef();
@@ -49,6 +52,17 @@ const Profile = () => {
       e.target.innerText = "Edit";
       updateTeamMember(docId, profil);
     }
+  };
+
+  const handleMessageButtonClick = (e)=>{
+    if(showMessages){
+      setShowMessages(false);
+      setMessageButtonText('Show Messages');
+    }else{
+      setShowMessages(true);
+      setMessageButtonText('Hide Messages');
+    }
+    
   };
 
   const onImageChange = (e, docId) => {
@@ -80,6 +94,8 @@ const Profile = () => {
         <Header as="h1" style={{ padding: "15px" }}>
           Profile
         </Header>
+        <Grid columns={2}>
+          <Grid.Column width={5}>
         <Card.Group centered>
           {currentUserProfil && currentUserProfil.map((member, i, arr) => {
             const { header, description, image, title, docId } = member;
@@ -161,14 +177,22 @@ const Profile = () => {
             );
           })}
         </Card.Group>
-          <Button as='div' labelPosition='right' onClick={()=>{history.push('/messages');}}>
+        </Grid.Column>
+        <Grid.Column width={5}>
+         
+          <Button as='div' labelPosition='right' onClick={handleMessageButtonClick}>
             <Button color='red'>
-              Messages
+              {messageButtonText}
             </Button>
             <Label as='a' basic color='red' pointing='left'>
               {currentUserMessages.length}
             </Label>
           </Button>
+          {
+            showMessages && <Messages data = {currentUserMessages} />
+          }
+          </Grid.Column>
+          </Grid>
       </Container>
     </div>
   );
