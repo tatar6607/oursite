@@ -1,44 +1,23 @@
-import React, { useState, createRef, useEffect } from "react";
-import { Container, Card, Header, Image, Button, Form, TextArea, Label, Grid } from "semantic-ui-react";
-import {useHistory} from 'react-router-dom';
-
+import React, { useState, createRef } from "react";
+import { Container, Card, Header, Image, Button, Form, TextArea, Segment } from "semantic-ui-react";
 import "./Home.css";
 // import team from "../data/team_data ";
 import { useTeam } from "../contexts/TeamContext";
 import { useAuth } from "../contexts/AuthContext";
-import { useMessages } from "../contexts/MessagesContext";
-import Messages from '../components/Messages';
 // import TeamImage from '../images/team_4.jpeg'
 
-const Profile = () => {
+const Team = () => {
   const { teamMembers, updateTeamMember, uploadImage } = useTeam();
   const [cartDocId, setCartDocId] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [memberImage, setMemberImage] = useState(null);
-  const [messageButtonText, setMessageButtonText] = useState('Show Messages');
   const [profil, setProfil] = useState({
     header: "",
     title: "",
     description: "",
   });
-  const [currentUserProfil, setCurrentUserProfil] = useState([]);
-  const [currentUserMessages, setCurrentUserMessages] = useState([]);
-  const [showMessages, setShowMessages] = useState(false);
   const { currentUser } = useAuth();
-  const { messages } = useMessages();
   const fileInputRef = createRef();
-  const history = useHistory();
-
-  useEffect(() => {
-    setCurrentUserProfil(
-      teamMembers.filter((member) => member.email === currentUser.email)
-    );
-
-    setCurrentUserMessages(
-      messages.filter((message) => message.personEmail === currentUser.email)
-    );
-
-  }, [teamMembers, messages]);
 
   const handleButtonClick = (e, member) => {
     const { docId, header, title, description } = member;
@@ -54,20 +33,10 @@ const Profile = () => {
     }
   };
 
-  const handleMessageButtonClick = (e)=>{
-    if(showMessages){
-      setShowMessages(false);
-      setMessageButtonText('Show Messages');
-    }else{
-      setShowMessages(true);
-      setMessageButtonText('Hide Messages');
-    }
-    
-  };
-
   const onImageChange = (e, docId) => {
     const reader = new FileReader();
     let file = e.target.files[0];
+    console.log(file);
     if (file) {
       reader.onload = () => {
         if (reader.readyState === 2) {
@@ -92,12 +61,10 @@ const Profile = () => {
       </Segment> */}
       <Container textAlign="center" className="body-card desc">
         <Header as="h1" style={{ padding: "15px" }}>
-          Profile
+          Our Team
         </Header>
-        <Grid columns={2}>
-          <Grid.Column width={5}>
         <Card.Group centered>
-          {currentUserProfil && currentUserProfil.map((member, i, arr) => {
+          {teamMembers.map((member, i, arr) => {
             const { header, description, image, title, docId } = member;
             return (
               <Card raised={true} key={docId}>
@@ -177,25 +144,9 @@ const Profile = () => {
             );
           })}
         </Card.Group>
-        </Grid.Column>
-        <Grid.Column width={5}>
-         
-          <Button as='div' labelPosition='right' onClick={handleMessageButtonClick}>
-            <Button color='red'>
-              {messageButtonText}
-            </Button>
-            <Label as='a' basic color='red' pointing='left'>
-              {currentUserMessages.length}
-            </Label>
-          </Button>
-          {
-            showMessages && <Messages data = {currentUserMessages} />
-          }
-          </Grid.Column>
-          </Grid>
       </Container>
     </div>
   );
 };
 
-export default Profile;
+export default Team;
