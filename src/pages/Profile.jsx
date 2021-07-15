@@ -90,95 +90,95 @@ const Profile = () => {
       {/* <Segment style={{padding:0}}>
         <Image src={TeamImage} style={{height: '300px'}} fluid></Image>
       </Segment> */}
-      <Container textAlign="center" className="body-card desc">
-        <Header as="h1" style={{ padding: "15px" }}>
+      {/* <Container textAlign="center" className="body-card desc" style={{border: "3px solid red"}}> */}
+        <Header as="h1" style={{ padding: "15px" }} textAlign="center">
           Profile
         </Header>
         <Grid columns={2}>
           <Grid.Column width={5}>
-        <Card.Group centered>
-          {currentUserProfil && currentUserProfil.map((member, i, arr) => {
-            const { header, description, image, title, docId } = member;
-            return (
-              <Card raised={true} key={docId}>
-                <Card.Content>
-                  <Card.Header className="icon-padding">
-                    <Image src={image} alt="" size="small" circular />
+            <Card.Group centered>
+              {currentUserProfil && currentUserProfil.map((member, i, arr) => {
+                const { header, description, image, title, docId } = member;
+                return (
+                  <Card raised={true} key={docId}>
+                    <Card.Content textAlign="center">
+                      <Card.Header className="icon-padding">
+                        <Image src={image} alt="" size="small" circular />
+                        {editMode && docId === cartDocId ? (
+                          <>
+                            <div className="ui one buttons mt-3">
+                              <Button
+                                basic
+                                color="blue"
+                                onClick={() => fileInputRef.current.click()}
+                              >
+                                Choose an image
+                              </Button>
+                            </div>
+                            <input
+                              ref={fileInputRef}
+                              type="file"
+                              hidden
+                              onChange={(e) => onImageChange(e, docId)}
+                            />
+                          </>
+                        ) : null}
+                      </Card.Header>
+                      {editMode && docId === cartDocId ? (
+                        <Form.Input
+                          fluid
+                          required
+                          onChange={(e) => handleProfilChange(e, "header")}
+                          value={profil.header}
+                        />
+                      ) : (
+                        <Card.Header content={header} />
+                      )}
+                      {editMode && docId === cartDocId ? (
+                        <Form.Input
+                          fluid
+                          required
+                          onChange={(e) => handleProfilChange(e, "title")}
+                          value={profil.title}
+                          className="mt-1"
+                        />
+                      ) : (
+                        <Card.Meta>
+                          <span>{title}</span>
+                        </Card.Meta>
+                      )}
+                    </Card.Content>
                     {editMode && docId === cartDocId ? (
-                      <>
-                        <div className="ui one buttons mt-3">
+                      <Form.Input
+                        id="form-textarea-control-opinion"
+                        control={TextArea}
+                        required
+                        style={{ minHeight: "200px" }}
+                        onChange={(e) => handleProfilChange(e, "description")}
+                        value={profil.description}
+                      />
+                    ) : (
+                      <Card.Content description={description} textAlign="center" />
+                    )}
+                    {currentUser ? (
+                      <Card.Content extra>
+                        <div className="ui two buttons">
                           <Button
                             basic
-                            color="blue"
-                            onClick={() => fileInputRef.current.click()}
+                            color="green"
+                            onClick={(e) => handleButtonClick(e, member)}
                           >
-                            Choose an image
+                            Edit
                           </Button>
                         </div>
-                        <input
-                          ref={fileInputRef}
-                          type="file"
-                          hidden
-                          onChange={(e) => onImageChange(e, docId)}
-                        />
-                      </>
+                      </Card.Content>
                     ) : null}
-                  </Card.Header>
-                  {editMode && docId === cartDocId ? (
-                    <Form.Input
-                      fluid
-                      required
-                      onChange={(e) => handleProfilChange(e, "header")}
-                      value={profil.header}
-                    />
-                  ) : (
-                    <Card.Header content={header} />
-                  )}
-                  {editMode && docId === cartDocId ? (
-                    <Form.Input
-                      fluid
-                      required
-                      onChange={(e) => handleProfilChange(e, "title")}
-                      value={profil.title}
-                      className="mt-1"
-                    />
-                  ) : (
-                    <Card.Meta>
-                      <span>{title}</span>
-                    </Card.Meta>
-                  )}
-                </Card.Content>
-                {editMode && docId === cartDocId ? (
-                  <Form.Input
-                    id="form-textarea-control-opinion"
-                    control={TextArea}
-                    required
-                    style={{ minHeight: "200px" }}
-                    onChange={(e) => handleProfilChange(e, "description")}
-                    value={profil.description}
-                  />
-                ) : (
-                  <Card.Content description={description} />
-                )}
-                {currentUser ? (
-                  <Card.Content extra>
-                    <div className="ui two buttons">
-                      <Button
-                        basic
-                        color="green"
-                        onClick={(e) => handleButtonClick(e, member)}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </Card.Content>
-                ) : null}
-              </Card>
-            );
-          })}
-        </Card.Group>
+                  </Card>
+                );
+              })}
+            </Card.Group>
         </Grid.Column>
-        <Grid.Column width={5}>
+        <Grid.Column width={11}>
          
           <Button as='div' labelPosition='right' onClick={handleMessageButtonClick}>
             <Button color='red'>
@@ -193,7 +193,7 @@ const Profile = () => {
           }
           </Grid.Column>
           </Grid>
-      </Container>
+      {/* </Container> */}
     </div>
   );
 };
