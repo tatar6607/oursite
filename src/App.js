@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessagesProvider } from "./contexts/MessagesContext";
+import { ChatProvider } from "./contexts/ChatContext";
 import { TeamProvider } from "./contexts/TeamContext";
 import { BodyCardDataProvider } from "./contexts/BodyCardData";
 import { ClientsProvider } from "./contexts/ClientsContext";
@@ -19,6 +20,7 @@ function App() {
   return (
     <AuthProvider>
       <MessagesProvider>
+      <ChatProvider>
         <TeamProvider>
           <BodyCardDataProvider>
             <ClientsProvider>
@@ -49,6 +51,7 @@ function App() {
             </ClientsProvider>
           </BodyCardDataProvider>
         </TeamProvider>
+        </ChatProvider>
       </MessagesProvider>
     </AuthProvider>
   );

@@ -29,6 +29,7 @@ export function MessagesProvider({ children }) {
             });
             setMessages(items);
         });
+        // console.log(messages);
     }   
   }, [currentUser, ref])
   
