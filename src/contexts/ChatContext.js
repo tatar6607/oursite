@@ -41,9 +41,9 @@ export function ChatProvider({ children }) {
             // deleteMessage(change.doc.id);
           } else {
               var message = change.doc.data();
-              const {time, text, from, to} = message;
+              const {time, text, from, fromEmail, to, toEmail} = message;
               var dateString = time.toDate().toDateString();
-              newChats.push({id: change.doc.id, dateString, from, text, to});
+              newChats.push({id: change.doc.id, dateString, from, fromEmail, text, to, toEmail});
           };
         });
         setChats(newChats);

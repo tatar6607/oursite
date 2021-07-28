@@ -1,7 +1,12 @@
 import React, {useEffect} from 'react';
 import { Button, Image, List } from 'semantic-ui-react'
 
-const Members = ({members, currentUser}) => {
+const Members = ({members, currentUser, setShowCHat, setChatMember}) => {
+
+    const handleChatButton = (e, memberEmail)=>{
+        setShowCHat(true);
+        setChatMember(memberEmail);
+    }
 
     const showMembers = ()=>{
         const teamMembers = members.filter((member) => member.email !== currentUser.email) ;
@@ -11,7 +16,7 @@ const Members = ({members, currentUser}) => {
             return(
                 <List.Item>
                     <List.Content floated='right'>
-                        <Button>Chat</Button>
+                        <Button onClick={(e)=>{handleChatButton(e, email)}}>Chat</Button>
                     </List.Content>
                     <Image avatar src={image} />
                     <List.Content>{header}</List.Content>
@@ -19,8 +24,9 @@ const Members = ({members, currentUser}) => {
             )
         });
     }
+
     return (
-        <List divided verticalAlign='middle'>
+        <List divided verticalAlign='middle' size="small" style={{marginRight: "5px"}}>
             {
                 showMembers()
             }

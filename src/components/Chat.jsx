@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
-const Chat = ({data}) => {
+const Chat = ({data, chatMember}) => {
 
     const displayChat = ()=>{
-            return data.map((chat, index)=>{
+            const newChatData = data.filter((chat)=> chat.fromEmail === chatMember);
+
+            return newChatData.map((chat, index)=>{
                 const {text, from, to, dateString} = chat;
                 return(
                     <Comment key={index}>
@@ -15,9 +17,6 @@ const Chat = ({data}) => {
                             <div>{dateString}</div>
                         </Comment.Metadata>
                         <Comment.Text>{text}</Comment.Text>
-                        <Comment.Actions>
-                            <Comment.Action>Reply</Comment.Action>
-                        </Comment.Actions>
                         </Comment.Content>
                     </Comment>
                 )
@@ -25,15 +24,15 @@ const Chat = ({data}) => {
     }
 
     return (
-        <Comment.Group>
+        <Comment.Group style={{marginRight: "5px"}}>
             <Header as='h4' dividing>
             Chat
             </Header>
             {
                 data && displayChat()
             }
-            <Form reply>
-                <Form.TextArea />
+            <Form reply size="mini">
+                <Form.TextArea style={{height:"10%"}}/>
                 <Button content='Add Reply' labelPosition='left' icon='edit' primary />
             </Form>
       </Comment.Group>
