@@ -24,6 +24,7 @@ const Profile = () => {
   const [currentUserChats, setCurrentUserChats] = useState([]);
   const [showMessages, setShowMessages] = useState(false);
   const [showCHat, setShowCHat] = useState(false);
+  const [chatMember, setChatMember] = useState(null);
 
   
   const history = useHistory();
@@ -100,7 +101,15 @@ const Profile = () => {
           {
             showCHat && <Chat data = {currentUserChats} />
           } */}
-          <Members members={teamMembers} currentUser={currentUser}/>
+          <Members 
+            members={teamMembers}
+            currentUser={currentUser}
+            setShowCHat={setShowCHat}
+            setChatMember={setChatMember}
+            />
+          {
+            showCHat && <Chat data = {currentUserChats} chatMember={chatMember}/>
+          }
           </Grid.Column>
           </Grid>
       {/* </Container> */}
