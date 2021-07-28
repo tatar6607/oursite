@@ -18,7 +18,7 @@ const Work = () => {
           {bodyCardData.map((info) => {
             const { header, description, icon, color } = info;
             return (
-              <Card color={color} href="/" raised={true}>
+              <Card color={color} href="/" raised={true} key={header}>
                 <Card.Content>
                   <Card.Header className="icon-padding">
                     <Icon name={icon} size="big" color={color} />

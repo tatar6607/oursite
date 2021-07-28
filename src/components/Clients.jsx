@@ -16,12 +16,12 @@ const Clients = () => {
       </Header>
       {/* <Card.Group centered items={clients} /> */}
       <Grid container centered relaxed columns={6}>
-        {clients.map((row) => {
+        {clients.map((row, index) => {
           return (
-            <Grid.Row>
+            <Grid.Row key={index}>
               {row.map((client) => {
                 return (
-                  <Grid.Column>
+                  <Grid.Column key={client.image}>
                     <Image src={client.image} size="large" />
                   </Grid.Column>
                 );

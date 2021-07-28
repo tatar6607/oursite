@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Card, Container, Segment } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
 
-import { useMessages } from "../contexts/MessagesContext";
-import { useAuth } from "../contexts/AuthContext";
 
-const Messages = () => {
-  const { messages } = useMessages();
-  const { currentUser } = useAuth();
-  const [filteredData, setFilteredData] = useState(messages);
-  const history = useHistory();
-
-  useEffect(() => {
-    setFilteredData(
-      messages.filter((message) => message.personEmail === currentUser.email)
-    );
-    // console.log(filteredData);
-  }, []);
+const Messages = ({data}) => {
 
   function displayMessages() {
-    return filteredData.map((message, index) => {
+    return data.map((message, index) => {
       return (
         <Card key={index}>
           <Card.Content>
@@ -45,13 +31,8 @@ const Messages = () => {
   return (
     <Container>
       <Segment>
-        <Card.Group>{messages && displayMessages()}</Card.Group>
+        <Card.Group>{data && displayMessages()}</Card.Group>
       </Segment>
-      <Segment>
-        <Button basic color="blue" onClick={()=>{history.push("/profile")}}>
-                  Back to Profile
-          </Button>
-        </Segment>
     </Container>
     );
 };
