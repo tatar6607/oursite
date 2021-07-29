@@ -106,7 +106,7 @@ const Profile = () => {
             setChatMember={setChatMember}
             />
           {
-            showCHat && <Chat currentUser = {currentUser} chatMember={chatMember}/>
+            showCHat && <Chat chatMember={chatMember} currentUserProfil={currentUserProfil}/>
           }
           </Grid.Column>
           </Grid>

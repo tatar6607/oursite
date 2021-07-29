@@ -3,8 +3,8 @@ import { Button, Image, List } from 'semantic-ui-react'
 
 const Members = ({members, currentUser, setShowCHat, setChatMember}) => {
 
-    const handleChatButton = (e, memberEmail)=>{
-        setChatMember(memberEmail);
+    const handleChatButton = (e, memberData)=>{
+        setChatMember(memberData);
         setShowCHat(true);
     }
 
@@ -16,7 +16,7 @@ const Members = ({members, currentUser, setShowCHat, setChatMember}) => {
             return(
                 <List.Item key={email}>
                     <List.Content floated='right'>
-                        <Button onClick={(e)=>{handleChatButton(e, email)}}>Chat</Button>
+                        <Button onClick={(e)=>{handleChatButton(e, member)}}>Chat</Button>
                     </List.Content>
                     <Image avatar src={image} />
                     <List.Content>{header}</List.Content>
