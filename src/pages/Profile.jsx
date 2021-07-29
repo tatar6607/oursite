@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
 import { useTeam } from "../contexts/TeamContext";
 import { useAuth } from "../contexts/AuthContext";
 import { useMessages } from "../contexts/MessagesContext";
-import { useChat } from "../contexts/ChatContext";
+
 import Messages from '../components/Messages';
 import Chat from "../components/Chat";
 import ProfileCard from "../components/ProfileCard";
@@ -15,13 +15,12 @@ const Profile = () => {
   const { teamMembers } = useTeam();
   const { currentUser } = useAuth();
   const { messages } = useMessages();
-  const {chats} = useChat();
+  
 
   const [messageButtonText, setMessageButtonText] = useState('Show Messages');
   const [chatButtonText, setChatButtonText] = useState('Show Chat');
   const [currentUserProfil, setCurrentUserProfil] = useState([]);
   const [currentUserMessages, setCurrentUserMessages] = useState([]);
-  const [currentUserChats, setCurrentUserChats] = useState([]);
   const [showMessages, setShowMessages] = useState(false);
   const [showCHat, setShowCHat] = useState(false);
   const [chatMember, setChatMember] = useState(null);
@@ -37,8 +36,7 @@ const Profile = () => {
     setCurrentUserMessages(
       messages.filter((message) => message.personEmail === currentUser.email)
     );
-    setCurrentUserChats(chats);
-  }, [teamMembers, messages, chats]);
+  }, [teamMembers, messages]);
 
   const handleMessageButtonClick = (e)=>{
     if(showMessages){
@@ -108,7 +106,7 @@ const Profile = () => {
             setChatMember={setChatMember}
             />
           {
-            showCHat && <Chat data = {currentUserChats} chatMember={chatMember}/>
+            showCHat && <Chat currentUser = {currentUser} chatMember={chatMember}/>
           }
           </Grid.Column>
           </Grid>
