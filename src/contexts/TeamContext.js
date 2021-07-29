@@ -27,9 +27,6 @@ export function TeamProvider({ children }) {
   }
 
   function uploadImage(docId, image, profil){
-    console.log(docId)
-    console.log(image)
-    console.log(profil)
     if(image){
       console.log(image.name);
       const storageRef = storage.ref(`team_member_images`);

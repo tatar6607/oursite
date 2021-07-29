@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {store} from '../firebase';
-import firebase from 'firebase/app'
+import firebase from 'firebase';
 
 import { useAuth } from './AuthContext';
 
@@ -14,45 +14,47 @@ export function useChat() {
 export function ChatProvider({ children }) {
   const [chats, setChats] = useState([]);
   const {currentUser} = useAuth();
-
+  
   const ref = store.collection('chats');
 
   function getUserName() {
     return currentUser.displayName;
   }
 
-  function addChat(chat){
-       var newChatData  = {...chat, time: firebase.firestore.FieldValue.serverTimestamp()}
-      ref.add(newChatData);
+  async function addChat(chat){
+    var time = await firebase.firestore.FieldValue.serverTimestamp()
+    var newChatData  = {...chat, time}
+    ref.add(newChatData);
   }
 
   useEffect(()=>{
     if(currentUser){
       // Create the query to load the last 12 messages and listen for new ones.
-      var query = ref.orderBy('time', 'desc').limit(12);
+      var query = ref.orderBy('time', 'asc').limit(50);
 
        // Start listening to the query.
-      query.onSnapshot(function(snapshot) {
+      const unsub = query.onSnapshot(function(snapshot) {
         var newChats = [];
-        snapshot.docChanges().forEach(function(change) {
-          if (change.type === 'removed') {
-            // deleteMessage(change.doc.id);
-          } else {
+        snapshot.docs.forEach(function(doc) {
               try {
-                var message = change.doc.data();
+                var message = doc.data();
                 const {time, text, from, fromEmail, to, toEmail} = message;
-                var dateString = time.toDate().toDateString();
-                newChats.push({id: change.doc.id, dateString, from, fromEmail, text, to, toEmail});
+                var dateString = time === null? "" : time.toDate().toUTCString();
+                newChats.push({id: doc.id, dateString, from, fromEmail, text, to, toEmail});
               } catch (error) {
-                console.log(change.doc.data());
+                console.log(error)
+                console.log(doc.data());
               }
-              
-          };
         });
+        // console.log(newChats);
         setChats(newChats);
       });
+      return () =>{
+        unsub();
+      }
     }   
-  }, [currentUser, ref])
+  }, [currentUser])
+
   
   const value = {
     chats,
