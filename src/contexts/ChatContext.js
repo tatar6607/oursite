@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {store} from '../firebase';
+import firebase from 'firebase/app'
 
 import { useAuth } from './AuthContext';
 
@@ -21,17 +22,14 @@ export function ChatProvider({ children }) {
   }
 
   function addChat(chat){
-      const data = {
-        ...chat,
-        name: getUserName(),
-      }
-      ref.add(chat);
+       var newChatData  = {...chat, time: firebase.firestore.FieldValue.serverTimestamp()}
+      ref.add(newChatData);
   }
 
   useEffect(()=>{
     if(currentUser){
       // Create the query to load the last 12 messages and listen for new ones.
-      var query = ref.orderBy('time').limit(12);
+      var query = ref.orderBy('time', 'desc').limit(12);
 
        // Start listening to the query.
       query.onSnapshot(function(snapshot) {
@@ -40,10 +38,15 @@ export function ChatProvider({ children }) {
           if (change.type === 'removed') {
             // deleteMessage(change.doc.id);
           } else {
-              var message = change.doc.data();
-              const {time, text, from, fromEmail, to, toEmail} = message;
-              var dateString = time.toDate().toDateString();
-              newChats.push({id: change.doc.id, dateString, from, fromEmail, text, to, toEmail});
+              try {
+                var message = change.doc.data();
+                const {time, text, from, fromEmail, to, toEmail} = message;
+                var dateString = time.toDate().toDateString();
+                newChats.push({id: change.doc.id, dateString, from, fromEmail, text, to, toEmail});
+              } catch (error) {
+                console.log(change.doc.data());
+              }
+              
           };
         });
         setChats(newChats);

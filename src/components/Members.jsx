@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Button, Image, List } from 'semantic-ui-react'
 
 const Members = ({members, currentUser, setShowCHat, setChatMember}) => {
 
     const handleChatButton = (e, memberEmail)=>{
-        setShowCHat(true);
         setChatMember(memberEmail);
+        setShowCHat(true);
     }
 
     const showMembers = ()=>{
@@ -14,7 +14,7 @@ const Members = ({members, currentUser, setShowCHat, setChatMember}) => {
         return teamMembers.map((member, index)=>{
             const {header, email, role, title, image} = member;
             return(
-                <List.Item>
+                <List.Item key={email}>
                     <List.Content floated='right'>
                         <Button onClick={(e)=>{handleChatButton(e, email)}}>Chat</Button>
                     </List.Content>
