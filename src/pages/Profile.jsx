@@ -10,6 +10,7 @@ import Messages from '../components/Messages';
 import Chat from "../components/Chat";
 import ProfileCard from "../components/ProfileCard";
 import Members from "../components/Members";
+import RespondEmail from "../components/RespondEmail";
 
 const Profile = () => {
   const { teamMembers } = useTeam();
@@ -18,10 +19,11 @@ const Profile = () => {
   
 
   const [messageButtonText, setMessageButtonText] = useState('Show Messages');
-  const [chatButtonText, setChatButtonText] = useState('Show Chat');
+  const [responseContact, setResponseContact] = useState(null);
   const [currentUserProfil, setCurrentUserProfil] = useState([]);
   const [currentUserMessages, setCurrentUserMessages] = useState([]);
   const [showMessages, setShowMessages] = useState(false);
+  const [showResponseForm, setShowResponseForm] = useState(false);
   const [showCHat, setShowCHat] = useState(false);
   const [chatMember, setChatMember] = useState(null);
 
@@ -42,20 +44,11 @@ const Profile = () => {
     if(showMessages){
       setShowMessages(false);
       setMessageButtonText('Show Messages');
+      
     }else{
+      setShowResponseForm(false);
       setShowMessages(true);
       setMessageButtonText('Hide Messages');
-    }
-    
-  };
-
-  const handleChatButtonClick = (e)=>{
-    if(showCHat){
-      setShowCHat(false);
-      setChatButtonText('Show Chat');
-    }else{
-      setShowCHat(true);
-      setChatButtonText('Hide Chat');
     }
     
   };
@@ -81,24 +74,24 @@ const Profile = () => {
             </Label>
           </Button>
           {
-            showMessages && <Messages data = {currentUserMessages} />
+            (showMessages && !showResponseForm) &&
+            <Messages data = {currentUserMessages} 
+                setResponseContact={setResponseContact} 
+                setShowResponseForm={setShowResponseForm}
+                handleMessageButtonClick={handleMessageButtonClick}
+                />
+          }
+          {
+            (showResponseForm && !showMessages) && 
+              <RespondEmail responseContact={responseContact}
+               handleMessageButtonClick={handleMessageButtonClick}
+              />
           }
           </Grid.Column>
           <Grid.Column width={5}>
             <Header as="h3" style={{ padding: "5px" }} textAlign="center">
               Members
             </Header>
-          {/* <Button as='div' labelPosition='right' onClick={handleChatButtonClick}>
-            <Button color='blue'>
-              {chatButtonText}
-            </Button>
-            <Label as='a' basic color='red' pointing='left'>
-              {currentUserChats.length}
-            </Label>
-          </Button>
-          {
-            showCHat && <Chat data = {currentUserChats} />
-          } */}
           <Members 
             members={teamMembers}
             currentUser={currentUser}
@@ -110,7 +103,6 @@ const Profile = () => {
           }
           </Grid.Column>
           </Grid>
-      {/* </Container> */}
     </div>
   );
 };

@@ -1,7 +1,15 @@
 import React from "react";
-import { Button, Card, Container, Segment } from "semantic-ui-react";
+import { Button, Card } from "semantic-ui-react";
 
-const Messages = ({data}) => {
+const Messages = ({data, setResponseContact, setShowResponseForm, handleMessageButtonClick}) => {
+
+  const handleResponseClick = (e, message)=>{
+    setResponseContact(message);
+    handleMessageButtonClick(e);
+    setShowResponseForm(true);
+
+  }
+
 
   function displayMessages() {
     return data.map((message, index) => {
@@ -18,7 +26,7 @@ const Messages = ({data}) => {
           </Card.Content>
           <Card.Content extra>
             <div className="ui two buttons">
-              <Button basic color="green">
+              <Button basic color="green" onClick={(e)=>handleResponseClick(e, message)}>
                 Respond
               </Button>
             </div>
@@ -30,9 +38,6 @@ const Messages = ({data}) => {
   return (
 
         <Card.Group>{data && displayMessages()}</Card.Group>
-        // <Button basic color="blue" onClick={()=>{history.push("/profile")}}>
-        //           Back to Profile
-        //   </Button>
     );
 };
 
