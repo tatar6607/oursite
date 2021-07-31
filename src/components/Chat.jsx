@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Comment, Form, Header } from "semantic-ui-react";
+import { Button, Comment, Form, Header, Segment } from "semantic-ui-react";
 
 import { useChat } from "../contexts/ChatContext";
 import { MatchExpression } from "../utils/Regex";
@@ -104,11 +104,14 @@ const Chat = ({ chatMember, currentUserProfil }) => {
     };
 
     return (
+
         <Comment.Group style={{ marginRight: "5px" }}>
             <Header as="h4" dividing>
                 Chat
-      </Header>
-            {currentUserChats && displayChat()}
+                </Header>
+            <Segment style={{ overflow: 'auto', maxHeight: '50vh' }}>
+                {currentUserChats && displayChat()}
+            </Segment>
             <Form reply size="mini">
                 <Form.TextArea
                     style={{ height: "10%" }}
