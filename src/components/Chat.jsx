@@ -59,7 +59,6 @@ const Chat = ({ chatMember, currentUserProfil }) => {
 
                 if (currentUser === nextUser && !start) {
                     elementsArray.splice(-1);
-                    console.log(index);
                     const { text, from, dateString, fromEmail } = currentUserChats[index-1];
                     var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
                     elementsArray.push(
