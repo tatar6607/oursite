@@ -22,6 +22,105 @@ const Chat = ({ chatMember, currentUserProfil }) => {
         );
     }, [chats, chatMember]);
 
+    
+
+    const displayChat2 = () => {
+        const elementsArray = [];
+        if (currentUserChats.length > 0) {
+            var index = 0
+            var currentUser = currentUserChats[index].fromEmail;
+            var nextUser = currentUserChats[index+1] ? currentUserChats[index+1].fromEmail : null;
+            var start = true;
+
+            const addNewComment = () =>{
+                const moreComments = [];
+                while(currentUser === nextUser &&  index < currentUserChats.length){
+                    const chat = currentUserChats[index];
+                    const { text, dateString, fromEmail } = chat;
+                    moreComments.push(
+                        <>
+                            <Comment.Metadata>
+                                <div>{dateString}</div>
+                            </Comment.Metadata>
+                            <Comment.Text>{text}</Comment.Text>
+                        </>
+                    )
+                    currentUser = fromEmail
+                    nextUser = index < currentUserChats.length -1 ? currentUserChats[index+1].fromEmail : null;
+                    index++
+                }
+                index--
+                return moreComments;
+            }
+
+            while (index < currentUserChats.length) {
+                const chat = currentUserChats[index];
+                const { text, from, dateString, fromEmail } = chat;
+
+                if (currentUser === nextUser && !start) {
+                    elementsArray.splice(-1);
+                    console.log(index);
+                    const { text, from, dateString, fromEmail } = currentUserChats[index-1];
+                    var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
+                    elementsArray.push(
+                       <Comment key={dateString} style={{ marginLeft: `${margin}` }}>
+                            <Comment.Avatar
+                                src={
+                                    fromEmail === currentUserProfil[0].email
+                                        ? currentUserProfil[0].image
+                                        : chatMember.image
+                                }
+                            />
+                            <Comment.Content>
+                                <Comment.Author as="a">
+                                    {fromEmail === currentUserProfil[0].email ? "you" : from}
+                                </Comment.Author>
+                                <Comment.Metadata>
+                                    <div>{dateString}</div>
+                                </Comment.Metadata>
+                                <Comment.Text>{text}</Comment.Text>
+                                {
+                                    addNewComment()
+                                }
+                            </Comment.Content>
+                        </Comment>
+                    );
+                    currentUser = fromEmail
+                    nextUser = index < currentUserChats.length -1 ? currentUserChats[index+1].fromEmail : null;
+                } else {
+                    var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
+                    elementsArray.push(
+                        <Comment key={dateString} style={{ marginLeft: `${margin}` }}>
+                            <Comment.Avatar
+                                src={
+                                    fromEmail === currentUserProfil[0].email
+                                        ? currentUserProfil[0].image
+                                        : chatMember.image
+                                }
+                            />
+                            <Comment.Content>
+                                <Comment.Author as="a">
+                                    {fromEmail === currentUserProfil[0].email ? "you" : from}
+                                </Comment.Author>
+                                <Comment.Metadata>
+                                    <div>{dateString}</div>
+                                </Comment.Metadata>
+                                <Comment.Text>{text}</Comment.Text>
+                            </Comment.Content>
+                        </Comment>
+                    );
+                }
+                start = false;
+                currentUser = fromEmail
+                nextUser = index < currentUserChats.length -1 ? currentUserChats[index+1].fromEmail : null;
+                index++
+                
+            }
+        }
+
+        return elementsArray;
+    };
+
     const displayChat = () => {
         if (currentUserChats.length > 0) {
             var nextUser = currentUserChats[0].fromEmail;
@@ -110,7 +209,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                 Chat
                 </Header>
             <Segment style={{ overflow: 'auto', maxHeight: '50vh' }}>
-                {currentUserChats && displayChat()}
+                {currentUserChats && displayChat2()}
             </Segment>
             <Form reply size="mini">
                 <Form.TextArea
