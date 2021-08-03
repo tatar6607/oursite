@@ -92,6 +92,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                     nextUser = index < currentUserChats.length -1 ? currentUserChats[index+1].fromEmail : null;
                 } else {
                     var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
+                    var style = fromEmail === currentUserProfil[0].email ? "from-me" : "from-them";
                     elementsArray.push(
                         <Comment key={dateString} style={{ marginLeft: `${margin}` }}>
                             <Comment.Avatar
@@ -108,7 +109,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                                 <Comment.Metadata>
                                     <div>{dateString}</div>
                                 </Comment.Metadata>
-                                <Comment.Text>{text}</Comment.Text>
+                                <Comment.Text className={`chatMessage ${style}`}>{text}</Comment.Text>
                             </Comment.Content>
                         </Comment>
                     );
