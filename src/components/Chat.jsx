@@ -75,7 +75,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                                 // style={{float:`${float}`}}
                             />
                             <Comment.Content>
-                                <Comment.Author as="a" >
+                                <Comment.Author as="a"  style={{margin:"auto"}}>
                                     {fromEmail === currentUserProfil[0].email ? "Me" : from}
                                 </Comment.Author>
                                 <Comment.Metadata>
