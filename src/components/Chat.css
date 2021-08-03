@@ -1,0 +1,68 @@
+.chatMessage {
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    line-height: 24px;
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 25px;
+  }
+
+  .chatMessage:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+  }
+
+  .chatMessage:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+  }
+  
+  .from-me {
+      max-width: 100%;
+      color: white; 
+      background: #87bde4;
+      align-self: flex-end;
+  }
+
+  .from-me:before {
+    content: "";
+    right: -7px;
+    width: 20px;
+    background-color: #87bde4;
+    border-bottom-left-radius: 16px 14px;
+    }
+
+    .from-me:after {
+        content: "";
+        right: -26px;
+        width: 26px;
+        background-color: white;
+        border-bottom-left-radius: 10px;
+    }
+
+  .from-them {
+      max-width: 50%;
+      background: #E5E5EA;
+      color: black;
+      align-self: flex-start;
+  }
+
+  .from-them:before {
+    content: "";
+    left: -7px;
+    width: 20px;
+    background-color: #E5E5EA;
+    border-bottom-right-radius: 16px;
+}
+
+.from-them:after {
+    content: "";
+    left: -26px;
+    width: 26px;
+    background-color: white;
+    border-bottom-right-radius: 10px;
+}
