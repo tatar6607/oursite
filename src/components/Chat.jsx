@@ -65,7 +65,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                     var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
                     var style = fromEmail === currentUserProfil[0].email ? "from-me" : "from-them";
                     elementsArray.push(
-                       <Comment key={dateString} style={{ marginLeft: `${margin}` , width: "50%"}}>
+                       <Comment key={dateString} style={{ marginLeft: `${margin}`}}>
                             <Comment.Avatar
                                 src={
                                     fromEmail === currentUserProfil[0].email
@@ -75,9 +75,10 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                                 // style={{float:`${float}`}}
                             />
                             <Comment.Content>
-                                <Comment.Author as="a"  style={{margin:"auto"}}>
+                                <Comment.Author as="a" >
                                     {fromEmail === currentUserProfil[0].email ? "Me" : from}
                                 </Comment.Author>
+                                <br />
                                 <Comment.Metadata>
                                     <div>{dateString}</div>
                                 </Comment.Metadata>
