@@ -119,59 +119,6 @@ const Chat = ({ chatMember, currentUserProfil }) => {
 
         return elementsArray;
     };
-
-    const displayChat = () => {
-        if (currentUserChats.length > 0) {
-            var nextUser = currentUserChats[0].fromEmail;
-            var start = true;
-
-            return currentUserChats.map((chat, index) => {
-                const { text, from, dateString, fromEmail } = chat;
-
-                if (fromEmail === nextUser && !start) {
-                    nextUser = fromEmail;
-                    var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
-                    return (
-                        <>
-                            <Comment.Metadata
-                                key={dateString}
-                                style={{ marginLeft: `${margin}` }}
-                            >
-                                <div>{dateString}</div>
-                            </Comment.Metadata>
-                            <Comment.Text style={{ marginLeft: `${margin}` }}>
-                                {text}
-                            </Comment.Text>
-                        </>
-                    );
-                } else {
-                    start = false;
-                    nextUser = fromEmail;
-                    var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
-                    return (
-                        <Comment key={dateString} style={{ marginLeft: `${margin}` }}>
-                            <Comment.Avatar
-                                src={
-                                    fromEmail === currentUserProfil[0].email
-                                        ? currentUserProfil[0].image
-                                        : chatMember.image
-                                }
-                            />
-                            <Comment.Content>
-                                <Comment.Author as="a">
-                                    {fromEmail === currentUserProfil[0].email ? "you" : from}
-                                </Comment.Author>
-                                <Comment.Metadata>
-                                    <div>{dateString}</div>
-                                </Comment.Metadata>
-                                <Comment.Text>{text}</Comment.Text>
-                            </Comment.Content>
-                        </Comment>
-                    );
-                }
-            });
-        }
-    };
     const handleReplyChange = (e) => {
         setChatReplyMessage(e.target.value);
     };
