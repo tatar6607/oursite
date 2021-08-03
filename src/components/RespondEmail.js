@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import emailjs from 'emailjs-com';
+
 import {
     Grid,
     Form,
@@ -47,13 +47,7 @@ export default function RespondEmail({responseContact, handleMessageButtonClick}
       message,
     };
     try {
-        emailjs.sendForm(process.env.REACT_APP_emailjs_service_id, process.env.REACT_APP_emailjs_template_id, e.target, process.env.REACT_APP_emailjs_user_id)
-        .then((result) => {
-            window.location.reload()  //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
-        }, (error) => {
-            console.log(error.text);
-        });
-      setSent(true);
+        //THis is where email should be sent
     } catch (error) {
       console.log(error);
     }
