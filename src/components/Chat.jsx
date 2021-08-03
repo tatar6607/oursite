@@ -3,6 +3,7 @@ import { Button, Comment, Form, Header, Segment } from "semantic-ui-react";
 
 import { useChat } from "../contexts/ChatContext";
 import { MatchExpression } from "../utils/Regex";
+import './Chat.css';
 
 const Chat = ({ chatMember, currentUserProfil }) => {
     const { chats, addChat } = useChat();
@@ -37,12 +38,13 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                 while(currentUser === nextUser &&  index < currentUserChats.length){
                     const chat = currentUserChats[index];
                     const { text, dateString, fromEmail } = chat;
+                    var style = fromEmail === currentUserProfil[0].email ? "from-me" : "from-them";
                     moreComments.push(
                         <>
                             <Comment.Metadata>
                                 <div>{dateString}</div>
                             </Comment.Metadata>
-                            <Comment.Text>{text}</Comment.Text>
+                            <Comment.Text className={`chatMessage ${style}`}>{text}</Comment.Text>
                         </>
                     )
                     currentUser = fromEmail
@@ -61,23 +63,25 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                     elementsArray.splice(-1);
                     const { text, from, dateString, fromEmail } = currentUserChats[index-1];
                     var margin = fromEmail === currentUserProfil[0].email ? "50%" : "0%";
+                    var style = fromEmail === currentUserProfil[0].email ? "from-me" : "from-them";
                     elementsArray.push(
-                       <Comment key={dateString} style={{ marginLeft: `${margin}` }}>
+                       <Comment key={dateString} style={{ marginLeft: `${margin}` , width: "50%"}}>
                             <Comment.Avatar
                                 src={
                                     fromEmail === currentUserProfil[0].email
                                         ? currentUserProfil[0].image
                                         : chatMember.image
                                 }
+                                // style={{float:`${float}`}}
                             />
                             <Comment.Content>
-                                <Comment.Author as="a">
+                                <Comment.Author as="a" >
                                     {fromEmail === currentUserProfil[0].email ? "Me" : from}
                                 </Comment.Author>
                                 <Comment.Metadata>
                                     <div>{dateString}</div>
                                 </Comment.Metadata>
-                                <Comment.Text>{text}</Comment.Text>
+                                <Comment.Text className={`chatMessage ${style}`}>{text}</Comment.Text>
                                 {
                                     addNewComment()
                                 }
