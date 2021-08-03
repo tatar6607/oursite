@@ -72,7 +72,7 @@ const Chat = ({ chatMember, currentUserProfil }) => {
                             />
                             <Comment.Content>
                                 <Comment.Author as="a">
-                                    {fromEmail === currentUserProfil[0].email ? "you" : from}
+                                    {fromEmail === currentUserProfil[0].email ? "Me" : from}
                                 </Comment.Author>
                                 <Comment.Metadata>
                                     <div>{dateString}</div>
