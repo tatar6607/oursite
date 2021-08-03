@@ -1,5 +1,4 @@
 .chatMessage {
-    max-width: 255px;
     word-wrap: break-word;
     margin-bottom: 12px;
     line-height: 24px;
@@ -17,12 +16,13 @@
 
   .chatMessage:after {
     content: "";
-        position: absolute;
+    position: absolute;
     bottom: 0;
     height: 25px;
   }
   
   .from-me {
+      max-width: 100%;
       color: white; 
       background: #87bde4;
       align-self: flex-end;
@@ -45,6 +45,7 @@
     }
 
   .from-them {
+      max-width: 50%;
       background: #E5E5EA;
       color: black;
       align-self: flex-start;
@@ -58,7 +59,7 @@
     border-bottom-right-radius: 16px;
 }
 
-.from-them :after {
+.from-them:after {
     content: "";
     left: -26px;
     width: 26px;
